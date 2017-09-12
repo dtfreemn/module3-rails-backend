@@ -43,8 +43,14 @@ ActiveRecord::Schema.define(version: 20170912143552) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
+    t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "likes", "replies"
+  add_foreign_key "likes", "users"
+  add_foreign_key "questions", "users", column: "questioner_id"
+  add_foreign_key "replies", "questions"
+  add_foreign_key "replies", "users", column: "replier_id"
 end

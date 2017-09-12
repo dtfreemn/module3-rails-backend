@@ -8,5 +8,8 @@ class CreateReplies < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+
+    add_foreign_key :replies, :users, column: :replier_id
+    add_foreign_key :replies, :questions
   end
 end
