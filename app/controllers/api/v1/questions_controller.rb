@@ -7,11 +7,13 @@ class Api::V1::QuestionsController < ApplicationController
 
   def create
     @question = Question.create(question_params)
-    render json: @question, status: 201
+    @question = Question.includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier]).find_by(id: @question.id)
+    render json: @question.as_json(include_hash), status: 201
   end
 
   def destroy
     Question.find_by(:id => params[:id]).destroy
+    render json: [], status: 202
   end
 
   def show
