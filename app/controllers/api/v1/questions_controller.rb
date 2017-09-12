@@ -1,13 +1,13 @@
 class Api::V1::QuestionsController < ApplicationController
 
   def index
-    @questions = Question.includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier])
+    @questions = Question.includes_all
     render json: @questions.as_json(include_hash), status: 200
   end
 
   def create
     @question = Question.create(question_params)
-    @question = Question.includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier]).find_by(id: @question.id)
+    @question = Question.includes_all.find_by(id: @question.id)
     render json: @question.as_json(include_hash), status: 201
   end
 
@@ -17,7 +17,7 @@ class Api::V1::QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier]).find_by(:id => params[:id])
+    @question = Question.includes_all.find_by(:id => params[:id])
 
     render json: @question.as_json(include_hash), status: 200
   end

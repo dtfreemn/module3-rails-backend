@@ -4,4 +4,6 @@ class Question < ApplicationRecord
   has_many :repliers, through: :replies
 
   validates :questioner, :title, :content, presence: true
+
+  scope :includes_all, -> {includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier])}
 end
