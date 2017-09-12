@@ -11,7 +11,18 @@ class Api::V1::QuestionsController < ApplicationController
   end
 
   def destroy
-    Question.find(params[:id]).destroy
+    Question.find_by(:id => params[:id]).destroy
+  end
+
+  def show
+    @question = Question.includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier]).find_by(:id => params[:id])
+    include_hash = {
+      :include => [:questioner, :replies => {
+        :include => [{:likes => {:include => :user}}, :replier]
+        }
+      ]
+    }
+    render json: @question.as_json(include_hash), status: 200
   end
 
   private

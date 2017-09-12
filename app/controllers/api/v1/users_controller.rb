@@ -10,8 +10,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    render json: @user, status: 200
+    @user = User.includes(:questions).find(params[:id])
+    render json: @user.as_json(:include => :questions), status: 200
   end
 
   private
