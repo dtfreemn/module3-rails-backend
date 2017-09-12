@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170912143552) do
     t.boolean "positive", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "reply_id"], name: "index_likes_on_user_id_and_reply_id", unique: true
   end
 
   create_table "questions", force: :cascade do |t|

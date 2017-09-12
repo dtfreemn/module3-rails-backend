@@ -10,5 +10,6 @@ class CreateLikes < ActiveRecord::Migration[5.1]
 
     add_foreign_key :likes, :users
     add_foreign_key :likes, :replies
+    add_index :likes, [:user_id, :reply_id], unique: true
   end
 end
