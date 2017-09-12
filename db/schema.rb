@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170912143552) do
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "reply_id", null: false
-    t.boolean "type", default: true, null: false
+    t.boolean "positive", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
