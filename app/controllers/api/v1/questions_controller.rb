@@ -16,6 +16,6 @@ class Api::V1::QuestionsController < ApplicationController
 
   private
   def question_params
-    params.permit(:title, :content, :user_id)
+    params.permit(:title, :content, :questioner_id)
   end
 end
