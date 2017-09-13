@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20170912143552) do
   create_table "likes", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "reply_id", null: false
-    t.boolean "positive", default: true, null: false
+    t.integer "point", limit: 2, default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "reply_id"], name: "index_likes_on_user_id_and_reply_id", unique: true

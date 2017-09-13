@@ -11,6 +11,6 @@ class Api::V1::LikesController < ApplicationController
 
   private
   def like_params
-    params.permit(:user_id, :reply_id, :positive)
+    params.permit(:user_id, :reply_id, :point)
   end
 end

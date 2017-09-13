@@ -1,4 +1,5 @@
 class Api::V1::RepliesController < ApplicationController
+
   def index
     @replies = Reply.where(question_id: params[:question_id])
     render json: @replies, status: 200

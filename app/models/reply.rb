@@ -6,4 +6,13 @@ class Reply < ApplicationRecord
   validates :question, :replier, :title, :content, presence: true
 
   scope :include_all, -> {includes(:likes).includes(:replier)}
+
+  attr_accessor :score
+
+  def score
+    score = self.likes.reduce(0) do |sum, like|
+      sum += like.point
+    end
+    self[:score] = score
+  end
 end
