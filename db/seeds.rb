@@ -1,7 +1,7 @@
-User.destroy_all
-Question.destroy_all
-Reply.destroy_all
 Like.destroy_all
+Reply.destroy_all
+Question.destroy_all
+User.destroy_all
 
 user_1 = User.create(name: "Tim", email: "tim.freeman@flatironschool.com")
 user_2 = User.create(name: "Gabi", email: "gabriela.ferrara@flatironschool.com")
