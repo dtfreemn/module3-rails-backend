@@ -11,6 +11,7 @@ class Api::V1::RepliesController < ApplicationController
 
   def destroy
     Reply.find(params[:id]).destroy
+    render json: [], status: 202
   end
 
   private
