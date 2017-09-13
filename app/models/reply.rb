@@ -4,4 +4,6 @@ class Reply < ApplicationRecord
   has_many :likes, dependent: :destroy
 
   validates :question, :replier, :title, :content, presence: true
+
+  scope :include_all, -> {includes(:likes).includes(:replier)}
 end

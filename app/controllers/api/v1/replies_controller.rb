@@ -5,8 +5,8 @@ class Api::V1::RepliesController < ApplicationController
   end
 
   def create
-    @reply = Reply.create(reply_params)
-    render json: @reply, status: 201
+    @reply = Reply.include_all.create(reply_params)
+    render json: @reply.as_json(include_hash), status: 201
   end
 
   def destroy
@@ -17,4 +17,11 @@ class Api::V1::RepliesController < ApplicationController
   def reply_params
     params.permit(:title, :content, :replier_id, :question_id)
   end
+
+  def include_hash
+    {
+      :include => [:replier, :likes]
+    }
+  end
+
 end

@@ -1,7 +1,7 @@
 class Api::V1::QuestionsController < ApplicationController
 
   def index
-    @questions = Question.includes_all
+    @questions = Question.includes_all.order(:created_at => :desc)
     render json: @questions.as_json(include_hash), status: 200
   end
 
