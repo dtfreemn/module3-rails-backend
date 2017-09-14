@@ -1,5 +1,4 @@
 class Api::V1::RepliesController < ApplicationController
-
   def index
     @replies = Reply.where(question_id: params[:question_id])
     render json: @replies, status: 200
@@ -11,8 +10,7 @@ class Api::V1::RepliesController < ApplicationController
   end
 
   def destroy
-    Reply.find(params[:id]).destroy
-    render json: [], status: 202
+    render json: Reply.find(params[:id]).destroy, status: 202
   end
 
   private

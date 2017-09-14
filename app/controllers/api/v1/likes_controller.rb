@@ -5,8 +5,7 @@ class Api::V1::LikesController < ApplicationController
     @possibleLike = Like.find_by(user_id: like_params[:user_id], reply_id: like_params[:reply_id])
 
     if @possibleLike && @possibleLike.point == like_params[:point]
-      @possibleLike.destroy
-      render json: [], status: 200
+      render json: @possibleLike.destroy, status: 202
     elsif @possibleLike
       @possibleLike.point = like_params[:point]
       @possibleLike.save
