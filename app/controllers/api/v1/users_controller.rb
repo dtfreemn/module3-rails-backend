@@ -2,7 +2,8 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-    render json: @user, status: 201
+    @user = User.include_all.find_by(id: @user.id)
+    render json: @user.as_json(include_hash), status: 201
   end
 
   def destroy
@@ -10,12 +11,18 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:questions).find(params[:id])
-    render json: @user.as_json(:include => :questions), status: 200
+    @user = User.include_all.find_by(id: params[:id])
+    render json: @user.as_json(include_hash), status: 200
   end
 
   private
   def user_params
     params.permit(:name, :email)
+  end
+
+  def include_hash
+    {
+      :include => [:questions]
+    }
   end
 end
