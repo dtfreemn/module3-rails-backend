@@ -9,6 +9,7 @@ Rails.application.routes.draw do
           resources :likes, only: [:create, :destroy]
         end
       end
+      get "/questions/search/:q", to: "questions#search"
     end
   end
 end

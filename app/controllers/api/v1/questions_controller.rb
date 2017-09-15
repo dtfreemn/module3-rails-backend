@@ -22,6 +22,15 @@ class Api::V1::QuestionsController < ApplicationController
     render json: @question.as_json(include_hash), status: 200
   end
 
+  def search
+    search = Question.search do
+      fulltext params[:q]
+    end
+    questions_ids = search.results.pluck(:id)
+    @questions = Question.includes_all.find(questions_ids)
+    render json: @questions.as_json(include_hash), status: 200
+  end
+
   private
   def question_params
     params.permit(:title, :content, :questioner_id)

@@ -6,4 +6,14 @@ class Question < ApplicationRecord
   validates :questioner, :title, :content, presence: true
 
   scope :includes_all, -> {includes(:questioner).includes(:replies).includes(:replies => [{:likes => :user}, :replier])}
+
+  searchable do
+    text :title, :content
+    text :replies_titles do
+      replies.map {|reply| reply.title}
+    end
+    text :replies_content do
+      replies.map {|reply| reply.content}
+    end
+  end
 end
