@@ -1,8 +1,7 @@
 class Api::V1::UsersController < ApplicationController
 
   def create
-    @user = User.create(user_params)
-    @user = User.include_all.find_by(id: @user.id)
+    @user = User.include_all.find_or_create_by(user_params)
     render json: @user.as_json(include_hash), status: 201
   end
 
