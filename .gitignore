@@ -14,3 +14,8 @@
 !/tmp/.keep
 
 .byebug_history
+
+solr/**/data
+solr/pids
+solr/test/
+solr/development
